@@ -1,32 +1,31 @@
 ---
+import '@/styles/global.css'
 import HeadSeo from '@/components/HeadSeo.astro'
+import { Navbar } from '@/components/blocks/navbar'
 
 interface Props {
   title?: string
   description?: string
-  ogImage?: string
+  image?: string
   type?: 'website' | 'article'
   keywords?: string
   author?: string
-  twitterHandle?: string
   publishedTime?: string
   modifiedTime?: string
-  locale?: string
+  noindex?: boolean
+  nofollow?: boolean
   schema?: Record<string, any>
 }
 
 const seoProps = Astro.props as Props
-const lang = seoProps.locale?.split('_')[0] || 'en'
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang='en'>
   <head>
     <HeadSeo {...seoProps} />
   </head>
-  <body class='flex min-h-full w-full flex-auto flex-col antialiased'>
-    <slot />
-
+  <body class='flex min-h-screen w-full flex-auto flex-col antialiased'>
     <!-- Skip to main content for accessibility -->
     <a
       href='#main-content'
@@ -34,5 +33,8 @@ const lang = seoProps.locale?.split('_')[0] || 'en'
     >
       Skip to main content
     </a>
+
+    <Navbar />
+    <slot />
   </body>
 </html>

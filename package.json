@@ -1,7 +1,7 @@
 {
   "name": "master-shadcn-astro-template",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -14,9 +14,12 @@
     "clean:node_modules": "rm -rf .astro node_modules"
   },
   "dependencies": {
+    "@astrojs/mdx": "^4.3.7",
     "@astrojs/react": "^4.4.2",
+    "@astrojs/rss": "^4.0.12",
     "@astrojs/sitemap": "^3.6.0",
     "@radix-ui/react-slot": "^1.2.4",
+    "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.18",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",

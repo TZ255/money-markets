@@ -2,17 +2,19 @@
 import { defineConfig } from 'astro/config'
 import tailwindcss from '@tailwindcss/vite'
 import sitemap from '@astrojs/sitemap'
-
+import mdx from '@astrojs/mdx'
 import react from '@astrojs/react'
 
 export default defineConfig({
   site: 'https://shadcnstudio.com/',
   integrations: [
     react(),
+    mdx(),
     sitemap({
       changefreq: 'weekly',
       priority: 0.7,
-      lastmod: new Date()
+      lastmod: new Date(),
+      filter: page => !page.includes('/admin/') && !page.includes('/private/')
     })
   ],
   output: 'static',
@@ -24,7 +26,23 @@ export default defineConfig({
     plugins: [tailwindcss()],
     build: {
       cssMinify: true,
-      minify: 'esbuild'
+      minify: 'esbuild',
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'react-vendor': ['react', 'react-dom']
+          }
+        }
+      }
+    },
+    ssr: {
+      noExternal: ['@radix-ui/*']
+    }
+  },
+  markdown: {
+    shikiConfig: {
+      theme: 'github-dark',
+      wrap: true
     }
   }
 })
