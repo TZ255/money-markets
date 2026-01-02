@@ -34,7 +34,7 @@ const seoProps = Astro.props as Props
       Skip to main content
     </a>
 
-    <Navbar />
+    <Navbar client:load />
     <slot />
   </body>
 </html>
