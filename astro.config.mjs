@@ -11,10 +11,42 @@ export default defineConfig({
     react(),
     mdx(),
     sitemap({
-      changefreq: 'weekly',
-      priority: 0.7,
-      lastmod: new Date(),
-      filter: page => !page.includes('/admin/') && !page.includes('/private/')
+      filter: page => !page.includes('/admin/') && !page.includes('/private/'),
+      customPages: [],
+      serialize(item) {
+        // Homepage - highest priority
+        if (item.url === 'https://shadcnstudio.com/') {
+          item.changefreq = 'daily'
+          item.priority = 1.0
+        }
+        // Blog listing pages - high priority
+        else if (item.url.includes('/blog') && !item.url.includes('/blog/')) {
+          item.changefreq = 'daily'
+          item.priority = 0.9
+        }
+        // Individual blog posts - medium-high priority
+        else if (item.url.includes('/blog/')) {
+          item.changefreq = 'weekly'
+          item.priority = 0.8
+        }
+        // Tag/category pages - medium priority
+        else if (item.url.includes('/tags/') || item.url.includes('/categories/')) {
+          item.changefreq = 'weekly'
+          item.priority = 0.7
+        }
+        // Static pages - medium-low priority
+        else if (item.url.includes('/login') || item.url.includes('/register')) {
+          item.changefreq = 'monthly'
+          item.priority = 0.5
+        }
+        // All other pages
+        else {
+          item.changefreq = 'weekly'
+          item.priority = 0.6
+        }
+
+        return item
+      }
     })
   ],
   output: 'static',
