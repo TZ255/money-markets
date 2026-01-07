@@ -15,19 +15,31 @@ interface Props {
   schema?: Record<string, any>
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const { title, description, image, type = 'website', keywords, author, publishedTime, modifiedTime, noindex = false, nofollow = false, schema } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const {
+  title,
+  description,
+  image,
+  type = 'website',
+  keywords,
+  author,
+  publishedTime,
+  modifiedTime,
+  noindex = false,
+  nofollow = false,
+  schema
+} = Astro.props
 
 // Use site metadata defaults if not provided
-const finalTitle = title ? `${title} | ${SITE_METADATA.title.default}` : SITE_METADATA.title.default;
-const finalDescription = description || SITE_METADATA.description;
-const finalKeywords = keywords || SITE_METADATA.keywords.join(', ');
-const finalImage = image || SITE_METADATA.openGraph.images[0].url;
-const imageURL = new URL(finalImage, Astro.site);
-const finalAuthor = author || SITE_METADATA.authors[0].name;
+const finalTitle = title ? `${title} | ${SITE_METADATA.title.default}` : SITE_METADATA.title.default
+const finalDescription = description || SITE_METADATA.description
+const finalKeywords = keywords || SITE_METADATA.keywords.join(', ')
+const finalImage = image || SITE_METADATA.openGraph.images[0].url
+const imageURL = new URL(finalImage, Astro.site)
+const finalAuthor = author || SITE_METADATA.authors[0].name
 
 // Robots meta tag
-const robotsContent = `${noindex || !SITE_METADATA.robots.index ? 'noindex' : 'index'}, ${nofollow || !SITE_METADATA.robots.follow ? 'nofollow' : 'follow'}, max-image-preview:large, max-snippet:-1, max-video-preview:-1`;
+const robotsContent = `${noindex || !SITE_METADATA.robots.index ? 'noindex' : 'index'}, ${nofollow || !SITE_METADATA.robots.follow ? 'nofollow' : 'follow'}, max-image-preview:large, max-snippet:-1, max-video-preview:-1`
 
 // Default schema.org structured data
 const defaultSchema = {
@@ -49,7 +61,6 @@ const defaultSchema = {
 
 const schemaData = schema || defaultSchema
 ---
-
 
 <!-- Essential Meta Tags -->
 <meta charset='utf-8' />
@@ -74,47 +85,30 @@ const schemaData = schema || defaultSchema
 <meta name='googlebot' content={robotsContent} />
 <meta name='bingbot' content={robotsContent} />
 
+<!-- Sitemap -->
+<link rel='sitemap' href='/sitemap-index.xml' />
+
 <!-- Verification (if provided) -->
-{SITE_METADATA.verification.google && (
-  <meta name='google-site-verification' content={SITE_METADATA.verification.google} />
-)}
-{SITE_METADATA.verification.bing && (
-  <meta name='msvalidate.01' content={SITE_METADATA.verification.bing} />
-)}
-{SITE_METADATA.verification.yandex && (
-  <meta name='yandex-verification' content={SITE_METADATA.verification.yandex} />
-)}
+{
+  SITE_METADATA.verification.google && (
+    <meta name='google-site-verification' content={SITE_METADATA.verification.google} />
+  )
+}
+{SITE_METADATA.verification.bing && <meta name='msvalidate.01' content={SITE_METADATA.verification.bing} />}
+{SITE_METADATA.verification.yandex && <meta name='yandex-verification' content={SITE_METADATA.verification.yandex} />}
 
 <!-- Language and Locale -->
 <meta property='og:locale' content={SITE_METADATA.locale} />
 <meta http-equiv='content-language' content={SITE_METADATA.language} />
 
 <!-- Favicon and Icons -->
-{SITE_METADATA.icons.icon.map((icon) => (
-  <link
-    rel='icon'
-    type={icon.type}
-    sizes={icon.sizes}
-    href={icon.url}
-  />
-))}
-{SITE_METADATA.icons.apple.map((icon) => (
-  <link
-    rel='apple-touch-icon'
-    sizes={icon.sizes}
-    href={icon.url}
-  />
-))}
-{SITE_METADATA.icons.shortcut.map((icon) => (
-  <link
-    rel='shortcut icon'
-    href={icon.url}
-  />
-))}
+{SITE_METADATA.icons.icon.map(icon => <link rel='icon' type={icon.type} sizes={icon.sizes} href={icon.url} />)}
+{SITE_METADATA.icons.apple.map(icon => <link rel='apple-touch-icon' sizes={icon.sizes} href={icon.url} />)}
+{SITE_METADATA.icons.shortcut.map(icon => <link rel='shortcut icon' href={icon.url} />)}
 <link rel='manifest' href='/site.webmanifest' />
 
 <!-- Sitemap -->
-<link rel='sitemap' href='/sitemap-index.xml' />
+<link rel='sitemap' href='/sitemap.xml' />
 
 <!-- RSS Feed -->
 <link
@@ -162,4 +156,3 @@ const schemaData = schema || defaultSchema
 
 <!-- Structured Data (JSON-LD) -->
 <script type='application/ld+json' set:html={JSON.stringify(schemaData)} />
-

@@ -26,6 +26,14 @@ const seoProps = Astro.props as Props
   <head>
     <HeadSeo {...seoProps} />
     <ClientRouter />
+    <style>
+      /* Disable all view transitions while keeping client-side navigation */
+      ::view-transition-group(*),
+      ::view-transition-old(*),
+      ::view-transition-new(*) {
+        animation-duration: 0ms !important;
+      }
+    </style>
   </head>
   <body class='flex min-h-screen w-full flex-auto flex-col antialiased'>
     <!-- Skip to main content for accessibility -->

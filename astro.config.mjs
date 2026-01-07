@@ -6,7 +6,7 @@ import mdx from '@astrojs/mdx'
 import react from '@astrojs/react'
 
 export default defineConfig({
-  site: 'https://shadcnstudio.com/',
+  site: 'http://localhost:4321/',
   integrations: [
     react(),
     mdx(),
@@ -15,30 +15,35 @@ export default defineConfig({
       customPages: [],
       serialize(item) {
         // Homepage - highest priority
-        if (item.url === 'https://shadcnstudio.com/') {
+        if (item.url === 'http://localhost:4321/') {
           item.changefreq = 'daily'
           item.priority = 1.0
         }
+
         // Blog listing pages - high priority
         else if (item.url.includes('/blog') && !item.url.includes('/blog/')) {
           item.changefreq = 'daily'
           item.priority = 0.9
         }
+
         // Individual blog posts - medium-high priority
         else if (item.url.includes('/blog/')) {
           item.changefreq = 'weekly'
           item.priority = 0.8
         }
+
         // Tag/category pages - medium priority
         else if (item.url.includes('/tags/') || item.url.includes('/categories/')) {
           item.changefreq = 'weekly'
           item.priority = 0.7
         }
+
         // Static pages - medium-low priority
         else if (item.url.includes('/login') || item.url.includes('/register')) {
           item.changefreq = 'monthly'
           item.priority = 0.5
         }
+
         // All other pages
         else {
           item.changefreq = 'weekly'
