@@ -9,7 +9,7 @@
     "astro": "astro",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,astro,css}\"",
     "check-types": "tsc --noEmit",
     "clean": "rm -rf .astro",
     "clean:node_modules": "rm -rf .astro node_modules"
