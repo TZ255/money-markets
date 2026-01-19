@@ -9,10 +9,6 @@ import type { BlogPost } from '@/components/blocks/blog-component/blog-component
 const HeroSection = ({ blogData }: { blogData: BlogPost[] }) => {
   const featuredPosts = blogData.filter(post => post.featured)
 
-  const handleCardClick = (post: BlogPost) => {
-    window.open(`/blog/${post.slug}`, '_self')
-  }
-
   return (
     <section id='home' className='bg-muted -mt-16 pt-32 pb-12 sm:pb-16 lg:pb-24'>
       <div className='mx-auto flex h-full max-w-7xl flex-col gap-16 px-4 sm:px-6 lg:px-8'>
@@ -38,19 +34,17 @@ const HeroSection = ({ blogData }: { blogData: BlogPost[] }) => {
 
         <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
           {featuredPosts.map((item, index) => (
-            <Card
-              key={`${item.author}-${index}`}
-              className='group cursor-pointer py-0 shadow-none'
-              onClick={() => handleCardClick(item)}
-            >
-              <CardContent className='grid grid-cols-1 px-0 xl:grid-cols-2' onClick={() => handleCardClick(item)}>
+            <Card key={`${item.author}-${index}`} className='group cursor-pointer py-0 shadow-none'>
+              <CardContent className='grid grid-cols-1 px-0 xl:grid-cols-2'>
                 <div className='p-6'>
                   <div className='h-59.5 w-full overflow-hidden rounded-lg'>
-                    <img
-                      src={item.imageUrl}
-                      alt={item.imageAlt}
-                      className='w-full object-cover transition-transform duration-300 group-hover:scale-105'
-                    />
+                    <a href={`/blog/${item.slug}`}>
+                      <img
+                        src={item.imageUrl}
+                        alt={item.imageAlt}
+                        className='w-full object-cover transition-transform duration-300 group-hover:scale-105'
+                      />
+                    </a>
                   </div>
                 </div>
                 <div className='flex flex-col justify-center gap-3 p-6'>
@@ -63,15 +57,16 @@ const HeroSection = ({ blogData }: { blogData: BlogPost[] }) => {
                       className='bg-primary/10 text-primary cursor-pointer border-0 text-sm'
                       onClick={e => {
                         e.stopPropagation()
-                        window.open(`/#category-${item.category}`, '_self')
                       }}
                     >
-                      {item.category}
+                      <a href={`/#category-${item.category}`}>{item.category}</a>
                     </Badge>
                   </div>
-                  <a href={`/blog/${item.slug}`}>
-                    <h3 className='text-xl font-medium'>{item.title}</h3>
-                  </a>
+                  <h3 className='text-xl font-medium'>
+                    <a href={`/blog/${item.slug}`} className='hover:underline'>
+                      {item.title}
+                    </a>
+                  </h3>
 
                   <p className='text-muted-foreground'>{item.description}</p>
                   <div className='flex w-full items-center justify-between gap-1 py-1'>
