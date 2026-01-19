@@ -1,19 +1,19 @@
 // Site Configuration
 // Centralized configuration for site metadata, SEO, and branding
 
-export const SITE_TITLE = 'shadcn Studio - Modern Astro Template'
+export const SITE_TITLE = 'Demo: Ink - Blog Landing Page | Shadcn Studio'
 export const SITE_DESCRIPTION =
-  'Build lightning-fast, SEO-optimized websites with our professional Astro template featuring shadcn/ui components, Tailwind CSS, and modern best practices.'
+  'Ink is a free Shadcn UI Blog Landing Page template to publish articles, insights, and categories with a clean, fast, and readable layout.'
 
 export const GITHUB_URL = 'https://github.com/yourusername/master-shadcn-astro'
 export const SITE_URL = 'https://shadcnstudio.com/'
 
 export const SITE_METADATA = {
   title: {
-    default: 'shadcn Studio - Modern Astro Template'
+    default: 'Demo: Ink - Blog Landing Page | Shadcn Studio'
   },
   description:
-    'A professional Astro template built with shadcn/ui, Tailwind CSS & React. Optimized for performance and SEO. Open source - MIT License.',
+    'Ink is a free Shadcn UI Blog Landing Page template to publish articles, insights, and categories with a clean, fast, and readable layout.',
   keywords: [
     'Astro',
     'astro template',
@@ -55,16 +55,16 @@ export const SITE_METADATA = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    siteName: 'shadcn Studio',
-    title: 'shadcn Studio - Modern Astro Template',
+    siteName: 'Ink',
+    title: 'Ink - Blog Landing Page | Shadcn Studio',
     description:
-      'A professional Astro template built with shadcn/ui, Tailwind CSS & React. Optimized for performance and SEO.',
+      'Ink is a free Shadcn UI Blog Landing Page template to publish articles, insights, and categories with a clean, fast, and readable layout.',
     images: [
       {
         url: '/images/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'shadcn Studio - Modern Astro Template',
+        alt: 'Ink - Blog Landing Page',
         type: 'image/png'
       }
     ]
@@ -73,9 +73,9 @@ export const SITE_METADATA = {
     card: 'summary_large_image',
     site: '@shadcnstudio',
     creator: '@shadcnstudio',
-    title: 'shadcn Studio - Modern Astro Template',
+    title: 'Ink - Blog Landing Page | Shadcn Studio',
     description:
-      'A professional Astro template built with shadcn/ui, Tailwind CSS & React. Optimized for performance and SEO.',
+      'Ink is a free Shadcn UI Blog Landing Page template to publish articles, insights, and categories with a clean, fast, and readable layout.',
     images: ['/images/og-image.png']
   },
   verification: {
@@ -95,7 +95,7 @@ export const SOCIAL_LINKS = {
 
 // Company information for structured data
 export const COMPANY_INFO = {
-  name: 'shadcn Studio',
+  name: 'Ink',
   legalName: 'shadcn Studio Inc.',
   url: SITE_URL,
   logo: `/images/site-logo.png`,

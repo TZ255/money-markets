@@ -13,7 +13,7 @@ export async function GET(context) {
     console.log('No blog posts found, generating empty RSS feed')
   }
 
-  const publishedPosts = posts.filter(post => !post.data.draft)
+  const publishedPosts = posts.filter(post => !post.data.featured)
 
   return rss({
     title: SITE_TITLE,

@@ -1,46 +1,132 @@
-import { COMPANY_INFO } from '@/consts'
+'use client'
+
+import { useEffect, useState } from 'react'
+
+import { MailIcon, MenuIcon } from 'lucide-react'
+
 import ThemeToggle from '@/components/layout/theme-toggle'
 
-// Navigation configuration
-const ITEMS = [
-  { label: 'Home', href: '/' },
-  { label: 'Features', href: '#features' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Login', href: '/login' },
-  { label: 'Register', href: '/register' }
-]
+import { Button } from '@/components/ui/button'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 
-export const Header = () => {
+import MenuDropdown from '@/components/blocks/menu-dropdown'
+import MenuNavigation from '@/components/blocks/menu-navigation'
+import type { NavigationSection } from '@/components/blocks/menu-navigation'
+
+import { cn } from '@/lib/utils'
+
+import LogoSvg from '@/assets/svg/logo'
+
+type HeaderProps = {
+  navigationData: NavigationSection[]
+  className?: string
+}
+
+const Header = ({ navigationData, className }: HeaderProps) => {
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    handleScroll()
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
+  const [activeSection, setActiveSection] = useState('home')
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = document.querySelectorAll('section[id]')
+      const scrollPosition = window.scrollY + window.innerHeight / 2
+
+      for (const section of sections) {
+        const element = section as HTMLElement
+        const { offsetTop, offsetHeight } = element
+
+        if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+          if (element.id !== activeSection) {
+            setActiveSection(element.id)
+          }
+
+          break
+        }
+      }
+    }
+
+    // Initial check
+    handleScroll()
+
+    // Listen for scroll events
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [activeSection])
+
   return (
-    <header className='sticky top-0 z-50 w-full border-b bg-gray-50 dark:bg-gray-900' role='banner'>
-      <div className='container mx-auto flex items-center justify-between px-4 py-6'>
-        <a href='/' className='flex items-center gap-2 text-2xl font-bold' aria-label={`${COMPANY_INFO.name} Home`}>
-          <img
-            src={COMPANY_INFO.logo}
-            alt={`${COMPANY_INFO.name} Logo`}
-            width={25}
-            height={25}
-            className='dark:invert'
-          />
-          <span>{COMPANY_INFO.name}</span>
+    <header
+      className={cn(
+        'sticky top-0 z-50 h-16 w-full transition-all duration-300',
+        {
+          'bg-background shadow-sm': isScrolled
+        },
+        className
+      )}
+    >
+      <div className='mx-auto flex h-full max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8'>
+        {/* Logo */}
+        <a href='/#home' className='flex items-center gap-3'>
+          <LogoSvg />
+          <span className='text-primary text-[20px] font-semibold'>INK</span>
         </a>
-        <nav aria-label='Primary navigation' className='flex items-center gap-6'>
+
+        {/* Navigation */}
+        <MenuNavigation navigationData={navigationData} activeSection={activeSection} className='max-lg:hidden' />
+
+        {/* Actions */}
+        <div className='flex gap-3'>
           <ThemeToggle />
-          <ul className='flex gap-6'>
-            {ITEMS.map(item => (
-              <li key={item.href}>
-                <a
-                  href={item.href}
-                  className='text-muted-foreground hover:text-foreground text-base font-medium transition-colors'
-                  aria-label={`Navigate to ${item.label}`}
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+          <Button variant='outline' className='max-sm:hidden' asChild>
+            <a href='#get-in-touch'>Get in Touch</a>
+          </Button>
+
+          {/* Navigation for small screens */}
+          <div className='flex gap-3'>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant='outline' size='icon' className='sm:hidden' asChild>
+                  <a href='#get-in-touch'>
+                    <MailIcon />
+                    <span className='sr-only'>Get in Touch</span>
+                  </a>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Get in Touch</TooltipContent>
+            </Tooltip>
+
+            <MenuDropdown
+              align='end'
+              navigationData={navigationData}
+              activeSection={activeSection}
+              trigger={
+                <Button variant='outline' size='icon' className='lg:hidden'>
+                  <MenuIcon />
+                  <span className='sr-only'>Menu</span>
+                </Button>
+              }
+            />
+          </div>
+        </div>
       </div>
     </header>
   )
 }
+
+export default Header
