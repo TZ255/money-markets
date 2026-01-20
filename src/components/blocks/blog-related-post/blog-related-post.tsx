@@ -53,7 +53,7 @@ const Blog = ({ relatedPosts }: { relatedPosts: BlogPost[] }) => {
                   <div className='flex items-center justify-between gap-1.5'>
                     <div className='text-muted-foreground flex items-center gap-1.5'>
                       <CalendarDaysIcon className='size-6' />
-                      <span>{post.pubDate.toLocaleDateString()}</span>
+                      <span>{post.pubDate}</span>
                     </div>
                     <Badge
                       className='bg-primary/10 text-primary border-0 text-sm'

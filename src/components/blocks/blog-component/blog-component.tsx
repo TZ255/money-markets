@@ -26,7 +26,7 @@ export type BlogPost = {
   description: string
   imageUrl: string
   imageAlt: string
-  pubDate: Date
+  pubDate: string
   author: string
   avatarUrl: string
   category: string
@@ -67,13 +67,7 @@ const BlogGrid = ({ posts, onCategoryClick }: { posts: BlogPost[]; onCategoryCli
               <div className='flex items-center justify-between gap-1.5'>
                 <div className='text-muted-foreground flex items-center gap-1.5'>
                   <CalendarDaysIcon className='size-6' />
-                  <p className='font-medium'>
-                    {new Date(post.pubDate).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}
-                  </p>
+                  <p className='font-medium'>{post.pubDate}</p>
                 </div>
                 <Badge
                   className='bg-primary/10 text-primary badge rounded-full border-0 text-sm'

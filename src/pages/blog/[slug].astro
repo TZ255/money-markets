@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/breadcrumb'
 import DynamicToc from '@/components/astro/DynamicToc.astro'
 import { AuthorMetadata } from '@/components/AuthorAvatar'
-import { getRelatedPosts, getPostNavigation, calculateReadTime, formatDate } from '@/utils/blog'
+import { getRelatedPosts, getPostNavigation, calculateReadTime } from '@/utils/blog'
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
 
 import { mdxComponents } from '@/components/mdx-components'
@@ -66,7 +66,7 @@ const schema = {
   headline: entry.data.title,
   description: entry.data.description,
   image: entry.data.imageUrl,
-  datePublished: entry.data.pubDate.toISOString(),
+  datePublished: entry.data.pubDate,
   author: {
     '@type': 'Person',
     name: entry.data.author
@@ -79,7 +79,7 @@ const schema = {
   description={entry.data.description}
   image={entry.data.imageUrl}
   type='article'
-  publishedTime={entry.data.pubDate.toISOString()}
+  publishedTime={entry.data.pubDate}
   author={entry.data.author}
   schema={schema}
 >
@@ -133,7 +133,7 @@ const schema = {
                 </div>
                 <div class='flex flex-col gap-1.5'>
                   <span class='text-muted-foreground text-sm'>Posted on</span>
-                  <span class='text-foreground text-sm font-medium'>{formatDate(entry.data.pubDate)}</span>
+                  <span class='text-foreground text-sm font-medium'>{entry.data.pubDate}</span>
                 </div>
               </div>
             </div>

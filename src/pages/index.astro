@@ -26,7 +26,7 @@ const allBlogPosts = publishedPosts
     readTime: post.data.readTime || 5,
     featured: post.data.featured || false
   }))
-  .sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime())
+  .sort((a, b) => b.pubDate.localeCompare(a.pubDate))
 
 // Page-specific SEO configuration
 const pageTitle = ''

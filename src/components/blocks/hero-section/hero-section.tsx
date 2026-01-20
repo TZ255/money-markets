@@ -50,13 +50,7 @@ const HeroSection = ({ blogData }: { blogData: BlogPost[] }) => {
                     <div className='flex items-center gap-1.5 py-1'>
                       <div className='text-muted-foreground flex grow items-center gap-1.5'>
                         <CalendarDaysIcon className='size-6' />
-                        <p className='font-medium'>
-                          {new Date(item.pubDate).toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric'
-                          })}
-                        </p>
+                        <p className='font-medium'>{item.pubDate}</p>
                       </div>
                       <Badge
                         className='bg-primary/10 text-primary cursor-pointer border-0 text-sm'

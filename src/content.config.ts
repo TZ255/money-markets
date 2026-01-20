@@ -10,7 +10,7 @@ const blog = defineCollection({
     description: z.string(),
     imageUrl: z.string().optional(),
     imageAlt: z.string().optional(),
-    pubDate: z.coerce.date(),
+    pubDate: z.string(),
     author: z.string().default('shadcn Studio'),
     avatarUrl: z.string().optional(),
     category: z.string().default('General'),
