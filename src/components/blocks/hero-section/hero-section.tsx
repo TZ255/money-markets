@@ -63,9 +63,7 @@ const HeroSection = ({ blogData }: { blogData: BlogPost[] }) => {
                     </Badge>
                   </div>
                   <h3 className='text-xl font-medium'>
-                    <a href={`/blog/${item.slug}`} className='hover:underline'>
-                      {item.title}
-                    </a>
+                    <a href={`/blog/${item.slug}`}>{item.title}</a>
                   </h3>
 
                   <p className='text-muted-foreground'>{item.description}</p>

@@ -72,9 +72,7 @@ const BlogGrid = ({ posts, onCategoryClick }: { posts: BlogPost[]; onCategoryCli
               </Badge>
             </div>
             <h3 className='line-clamp-2 text-lg font-medium md:text-xl'>
-              <a href={`/blog/${post.slug}`} className='hover:underline'>
-                {post.title}
-              </a>
+              <a href={`/blog/${post.slug}`}>{post.title}</a>
             </h3>
             <p className='text-muted-foreground line-clamp-2'>{post.description}</p>
             <div className='flex items-center justify-between'>
