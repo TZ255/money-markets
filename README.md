@@ -74,8 +74,6 @@ While this approach offers flexibility and control, it comes with some limitatio
 
 # Shadcn + Astro — Ink Landing Page
 
-A modern, responsive business landing page built with [Astro](https://astro.build/) and [ShadcnUI](https://ui.shadcn.com/).
-
 This project showcases a complete business website with sections for Header, Hero, Changelog Timeline,FAQ, and call-to-action components.
 
 ## ✨ Features
@@ -119,7 +117,6 @@ shadcn-studio-astro-template/
 │   ├── pages/                 # Route-based pages
 │   │   ├── 404.astro          # 404 page
 │   │   ├── index.astro        # Home page
-│   │   ├── login.astro        # Login page
 │   │   └── rss.xml.js         # RSS feed generator
 │   │
 │   ├── styles/
@@ -230,27 +227,47 @@ export const siteConfig = {
 }
 ```
 
-## 📦 Dependencies
+### 🔍 SEO & Site Configuration
 
-### Main Dependencies
+Configure the site's SEO and global metadata in `src/consts.ts`. These settings power the `HeadSeo.astro` layout and `seo.ts` helpers so pages have correct titles, descriptions, and social previews.
 
-- **Astro 5.16.6** - Fast static site generator with zero JS by default
-- **React 19.2.3** - UI library for interactive components
-- **Tailwind CSS 4.1.18** - Utility-first CSS framework
-- **Radix UI** - Unstyled, accessible component primitives
-- **Class Variance Authority** - Type-safe component variant management
-- **@Astrojs/React** - Astro integration for React components
-- **@Astrojs/MDX** - MDX support for Astro
-- **@Astrojs/Sitemap** - Automatic sitemap generation
-- **@Astrojs/RSS** - RSS feed generation
+Recommended fields:
 
-### Key Plugins
+- `siteTitle`: The site-wide default title.
+- `siteDescription`: Default meta description for pages.
+- `siteUrl`: The canonical base URL for building absolute links.
+- `siteLocale`: Locale string used for html/lang and Open Graph (e.g. `en-US`).
+- `siteAuthor`: Default author/creator name.
+- `siteKeywords`: Array of SEO keywords.
+- `socialImage`: Path to the default social preview image (OG/Twitter card).
+- `faviconPath`: Path to the favicon in `/public`.
+- `themeColor`: Theme color meta for browsers and PWA.
+- `twitterHandle`: Official Twitter/X handle for site cards.
+- `analyticsId`: Optional analytics measurement id (Google Analytics, Plausible, etc.).
 
-- **lucide-react** - Beautiful, consistent icon library with 562+ React icons
-- **prettier-plugin-tailwindcss** - Automatic Tailwind CSS class sorting
-- **@tailwindcss/typography** - Professional typographic styles
-- **prettier-plugin-astro** - Astro code formatting support
-- **ESLint & TypeScript** - Code quality and type safety tools
+Example `siteConfig` with SEO fields:
+
+```typescript
+// Example SEO & site settings — edit src/consts.ts
+export const siteConfig = {
+  siteTitle: 'Ink — Blog Landing Page',
+  siteDescription: 'A beautifully crafted Blog and product landing page built with Astro and shadcn/studio.',
+  siteUrl: 'https://example.com',
+  siteLocale: 'en-US',
+  siteAuthor: 'Shadcn Studio',
+  siteKeywords: ['Blog', 'landing page', 'astro', 'shadcn'],
+  socialImage: '/images/social-preview.png',
+  faviconPath: '/favicon/favicon.ico',
+  themeColor: '#0ea5e9',
+  twitterHandle: '@ShadcnStudio',
+  analyticsId: '' // optional
+}
+```
+
+Tips:
+
+- Keep `siteUrl` consistent with your deployed domain to ensure correct canonical and Open Graph URLs.
+- Place social preview images in `public/images` and reference them with absolute paths (e.g. `/images/social-preview.png`).
 
 ## 🌐 Deployment
 
