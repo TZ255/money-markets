@@ -118,8 +118,7 @@ const Blog = ({ blogData = [] }: BlogProps) => {
       post.title.toLowerCase().includes(query) ||
       post.description.toLowerCase().includes(query) ||
       post.author.toLowerCase().includes(query) ||
-      post.category.toLowerCase().includes(query) ||
-      post.tags?.some(tag => tag.toLowerCase().includes(query))
+      post.category.toLowerCase().includes(query)
 
     return matchesCategory && matchesSearch
   })

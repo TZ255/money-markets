@@ -156,27 +156,34 @@ const schema = {
             <!-- Post Navigation -->
             <div class='flex w-full justify-between pt-8'>
               {
-                navigation.older && (
+                navigation.older ? (
                   <a href={`/blog/${navigation.older.data.slug}`}>
-                    <Button
-                      className='rounded-xl bg-sky-600/10 text-sky-600 hover:bg-sky-600/20 focus-visible:ring-sky-600/20 dark:bg-sky-400/10 dark:text-sky-400 dark:hover:bg-sky-400/20 dark:focus-visible:ring-sky-400/40'
-                      variant='outline'
-                    >
+                    <Button className='rounded-xl' variant='outline'>
                       <ChevronLeftIcon className='size-4' />
                       Previous Post
                     </Button>
                   </a>
+                ) : (
+                  <Button className='rounded-xl' variant='outline' disabled>
+                    <ChevronLeftIcon className='size-4' />
+                    Previous Post
+                  </Button>
                 )
               }
 
               {
-                navigation.newer && (
+                navigation.newer ? (
                   <a class='ms-auto' href={`/blog/${navigation.newer.data.slug}`}>
                     <Button className='rounded-xl' variant='outline'>
                       Next Post
                       <ChevronRightIcon className='size-4' />
                     </Button>
                   </a>
+                ) : (
+                  <Button className='rounded-xl ms-auto' variant='outline' disabled>
+                    Next Post
+                    <ChevronRightIcon className='size-4' />
+                  </Button>
                 )
               }
             </div>
@@ -185,37 +192,6 @@ const schema = {
       </div>
     </section>
   </main>
-
-  <Button
-    variant='outline'
-    size='icon'
-    className='group fixed right-8 bottom-8 z-50 hidden'
-    id='scroll-to-top'
-    title='Scroll to top'
-    aria-label='Scroll to top'
-  >
-    <span class='mx-auto transition-all group-hover:-translate-y-0.5'>↑</span>
-  </Button>
-
-  <script>
-    document.addEventListener('astro:page-load', () => {
-      const scrollToTopButton = document.getElementById('scroll-to-top')
-      const footer = document.querySelector('footer')
-
-      if (scrollToTopButton && footer) {
-        scrollToTopButton.addEventListener('click', () => {
-          window.scrollTo({ top: 0, behavior: 'smooth' })
-        })
-
-        window.addEventListener('scroll', () => {
-          const footerRect = footer.getBoundingClientRect()
-          const isFooterVisible = footerRect.top <= window.innerHeight
-
-          scrollToTopButton.classList.toggle('hidden', window.scrollY <= 300 || isFooterVisible)
-        })
-      }
-    })
-  </script>
 
   <script>
     if (document.querySelector('.katex')) {
