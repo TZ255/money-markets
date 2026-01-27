@@ -141,7 +141,12 @@ const schema = {
             {
               entry.data.imageUrl && (
                 <div>
-                  <img src={entry.data.imageUrl} alt={entry.data.title} class='max-h-148 w-full rounded-xl' />
+                  <img
+                    src={entry.data.imageUrl}
+                    alt={entry.data.title}
+                    class='max-h-148 w-full rounded-xl'
+                    loading='lazy'
+                  />
                 </div>
               )
             }

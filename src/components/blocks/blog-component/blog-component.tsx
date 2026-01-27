@@ -62,6 +62,7 @@ const BlogGrid = ({ posts, onCategoryClick }: { posts: BlogPost[]; onCategoryCli
                   src={post.imageUrl}
                   alt={post.imageAlt}
                   className='h-59.5 w-full object-cover transition-transform duration-300 group-hover:scale-105'
+                  loading='lazy'
                 />
               </div>
               <div className='flex items-center justify-between gap-1.5'>

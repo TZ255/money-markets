@@ -43,6 +43,7 @@ const HeroSection = ({ blogData }: { blogData: BlogPost[] }) => {
                         src={item.imageUrl}
                         alt={item.imageAlt}
                         className='w-full object-cover transition-transform duration-300 group-hover:scale-105'
+                        loading='lazy'
                       />
                     </div>
                   </div>

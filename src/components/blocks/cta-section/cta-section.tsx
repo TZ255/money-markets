@@ -18,6 +18,7 @@ const CTA = () => {
                   src='/images/cta.webp'
                   alt='Workspace with laptop'
                   className='h-full w-full rounded-lg object-cover'
+                  loading='lazy'
                 />
               </div>
 
