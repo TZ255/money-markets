@@ -156,4 +156,14 @@ tocHeadings.forEach(heading => {
   })
 
   observer.observe(document.body, { childList: true, subtree: true })
+
+  // Reinitialize TOC on URL change by monitoring location.href
+  let previousUrl = window.location.href
+  setInterval(() => {
+    const currentUrl = window.location.href
+    if (currentUrl !== previousUrl) {
+      previousUrl = currentUrl
+      initializeToc()
+    }
+  }, 500)
 </script>

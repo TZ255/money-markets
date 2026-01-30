@@ -45,7 +45,7 @@ export function getPostNavigation(
   currentSlug: string
 ): { previous: CollectionEntry<'blog'> | null; next: CollectionEntry<'blog'> | null } {
   // Sort posts by pubDate (newest first)
-  const sortedPosts = [...posts].sort((a, b) => b.data.pubDate.localeCompare(a.data.pubDate))
+  const sortedPosts = [...posts].sort((a, b) => a.data.id - b.data.id)
   const currentIndex = sortedPosts.findIndex(post => post.id === currentSlug)
 
   if (currentIndex === -1) {
