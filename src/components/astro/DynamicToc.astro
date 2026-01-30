@@ -86,7 +86,7 @@ tocHeadings.forEach(heading => {
 
 <script>
   // Smooth scroll behavior and active link highlighting
-  document.addEventListener('DOMContentLoaded', () => {
+  const initializeToc = () => {
     const links = document.querySelectorAll('.toc-link')
     const sections = document.querySelectorAll('h2, h3')
     let activeId = ''
@@ -141,5 +141,19 @@ tocHeadings.forEach(heading => {
         }
       })
     }
+  }
+
+  document.addEventListener('DOMContentLoaded', initializeToc)
+
+  // Reinitialize TOC on page navigation
+  if (import.meta.hot) {
+    import.meta.hot.on('astro:page-load', initializeToc)
+  }
+
+  // Use MutationObserver to detect DOM changes and reinitialize TOC
+  const observer = new MutationObserver(() => {
+    initializeToc()
   })
+
+  observer.observe(document.body, { childList: true, subtree: true })
 </script>

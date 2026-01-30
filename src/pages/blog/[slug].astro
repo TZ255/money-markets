@@ -32,7 +32,7 @@ const { Content, headings } = await render(entry)
 
 // Get all posts for navigation and related posts
 const allPosts = await getCollection('blog')
-const publishedPosts = allPosts.filter(post => !post.data.featured)
+const publishedPosts = allPosts
 
 // Get related posts (same category)
 const relatedPosts = getRelatedPosts(publishedPosts, entry.id, entry.data.category, 3)
