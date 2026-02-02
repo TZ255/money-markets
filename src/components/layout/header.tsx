@@ -40,6 +40,13 @@ const Header = ({ navigationData, className }: HeaderProps) => {
 
   useEffect(() => {
     const handleScroll = () => {
+      // Only handle scroll-based active section on the home page
+      const path = window.location.pathname
+
+      if (path !== '/') {
+        return
+      }
+
       const sections = document.querySelectorAll('section[id]')
       const scrollPosition = window.scrollY + window.innerHeight / 2
 
@@ -76,7 +83,9 @@ const Header = ({ navigationData, className }: HeaderProps) => {
       if (path === '/' || path === '/#home') {
         setActiveSection('home')
       } else if (path.startsWith('/blog/')) {
-        setActiveSection('blog')
+        setActiveSection('') // Don't show any active state on blog post pages
+      } else if (path.startsWith('/contact')) {
+        setActiveSection('') // Don't show any active state on contact page
       } else {
         setActiveSection('') // Default case for other routes
       }

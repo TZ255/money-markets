@@ -24,7 +24,7 @@ const HeroSection = ({ blogData }: { blogData: BlogPost[] }) => {
             Learn how to design, develop, launch, and grow digital products through practical knowledge and proven
             frameworks.
           </p>
-          <form className='gap-3 py-1 max-sm:space-y-2 sm:flex sm:flex-row md:w-sm'>
+          <form className='gap-3 py-1 max-sm:w-full max-sm:space-y-2 sm:flex sm:flex-row md:w-sm'>
             <Input type='email' placeholder='Your email' className='bg-background h-10 flex-1 text-base' />
             <Button size='lg' className='text-base max-sm:w-full' asChild type='submit'>
               <a href='#'>Subscribe</a>
@@ -34,18 +34,18 @@ const HeroSection = ({ blogData }: { blogData: BlogPost[] }) => {
 
         <div className='grid grid-cols-1 gap-6 sm:grid-cols-2'>
           {featuredPosts.map((item, index) => (
-            <a href={`/blog/${item.slug}`} key={`${item.author}-${index}`} className='group'>
-              <Card className='cursor-pointer py-0 shadow-none'>
+            <div key={`${item.author}-${index}`} className='group'>
+              <Card className='cursor-default py-0 shadow-none'>
                 <CardContent className='grid grid-cols-1 px-0 xl:grid-cols-2'>
                   <div className='p-6'>
-                    <div className='h-59.5 w-full overflow-hidden rounded-lg'>
+                    <a href={`/blog/${item.slug}`} className='block h-59.5 w-full overflow-hidden rounded-lg'>
                       <img
                         src={item.imageUrl}
                         alt={item.imageAlt}
                         className='w-full object-cover transition-transform duration-300 group-hover:scale-105'
                         loading='lazy'
                       />
-                    </div>
+                    </a>
                   </div>
                   <div className='flex flex-col justify-center gap-3 p-6'>
                     <div className='flex items-center gap-1.5 py-1'>
@@ -58,12 +58,15 @@ const HeroSection = ({ blogData }: { blogData: BlogPost[] }) => {
                         onClick={e => {
                           e.preventDefault()
                           e.stopPropagation()
+                          window.location.href = `/#category-${item.category}`
                         }}
                       >
                         {item.category}
                       </Badge>
                     </div>
-                    <h3 className='text-xl font-medium'>{item.title}</h3>
+                    <a href={`/blog/${item.slug}`}>
+                      <h3 className='text-xl font-medium'>{item.title}</h3>
+                    </a>
 
                     <p className='text-muted-foreground'>{item.description}</p>
                     <div className='flex w-full items-center justify-between gap-1 py-1'>
@@ -71,14 +74,17 @@ const HeroSection = ({ blogData }: { blogData: BlogPost[] }) => {
                       <Button
                         size='icon'
                         className='group-hover:bg-primary! bg-background text-foreground hover:bg-primary! hover:text-primary-foreground group-hover:text-primary-foreground border group-hover:border-transparent hover:border-transparent'
+                        asChild
                       >
-                        <ArrowUpRightIcon />
+                        <a href={`/blog/${item.slug}`}>
+                          <ArrowUpRightIcon />
+                        </a>
                       </Button>
                     </div>
                   </div>
                 </CardContent>
               </Card>
-            </a>
+            </div>
           ))}
         </div>
       </div>

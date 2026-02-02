@@ -14,28 +14,37 @@ const Footer = () => {
           </div>
         </a>
         <div className='flex flex-wrap items-center justify-center gap-x-3 gap-y-2 whitespace-nowrap sm:gap-5'>
-          <a href='#' className='opacity-80 transition-opacity duration-300 hover:opacity-100'>
+          <a
+            href='#'
+            className='text-muted-foreground hover:text-foreground opacity-80 transition-opacity duration-300 hover:opacity-100'
+          >
             Support
           </a>
-          <a href='#' className='opacity-80 transition-opacity duration-300 hover:opacity-100'>
+          <a
+            href='#'
+            className='text-muted-foreground hover:text-foreground opacity-80 transition-opacity duration-300 hover:opacity-100'
+          >
             Terms & Conditions
           </a>
-          <a href='#' className='opacity-80 transition-opacity duration-300 hover:opacity-100'>
+          <a
+            href='#'
+            className='text-muted-foreground hover:text-foreground opacity-80 transition-opacity duration-300 hover:opacity-100'
+          >
             Privacy Policy
           </a>
         </div>
 
         <div className='flex items-center gap-4'>
-          <a href='#'>
+          <a href='#' className='text-muted-foreground hover:text-foreground'>
             <FacebookIcon className='size-5' />
           </a>
-          <a href='#'>
+          <a href='#' className='text-muted-foreground hover:text-foreground'>
             <InstagramIcon className='size-5' />
           </a>
-          <a href='#'>
+          <a href='#' className='text-muted-foreground hover:text-foreground'>
             <TwitterIcon className='size-5' />
           </a>
-          <a href='#'>
+          <a href='#' className='text-muted-foreground hover:text-foreground'>
             <YoutubeIcon className='size-5' />
           </a>
         </div>
