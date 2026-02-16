@@ -6,7 +6,7 @@ import { MailIcon, MenuIcon } from 'lucide-react'
 import ThemeToggle from '@/components/layout/theme-toggle'
 
 import { Button } from '@/components/ui/button'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
 import MenuDropdown from '@/components/blocks/menu-dropdown'
 import MenuNavigation from '@/components/blocks/menu-navigation'
@@ -121,17 +121,19 @@ const Header = ({ navigationData, className }: HeaderProps) => {
 
           {/* Navigation for small screens */}
           <div className='flex gap-3'>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button variant='outline' size='icon' className='sm:hidden' asChild>
-                  <a href='/contact-us'>
-                    <MailIcon />
-                    <span className='sr-only'>Get in Touch</span>
-                  </a>
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>Get in Touch</TooltipContent>
-            </Tooltip>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant='outline' size='icon' className='sm:hidden' asChild>
+                    <a href='/contact-us'>
+                      <MailIcon />
+                      <span className='sr-only'>Get in Touch</span>
+                    </a>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>Get in Touch</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
 
             <MenuDropdown
               align='end'
