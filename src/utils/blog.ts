@@ -2,69 +2,62 @@
 import type { CollectionEntry } from 'astro:content'
 
 /**
- * Calculate read time based on word count
  * Average reading speed: 200 words per minute
  */
 export function calculateReadTime(text: string | undefined): number {
   if (!text) return 1
   const wordsPerMinute = 200
   const words = text.trim().split(/\s+/).length
-  const readTime = Math.ceil(words / wordsPerMinute)
-
-  return readTime
+  return Math.max(1, Math.ceil(words / wordsPerMinute))
 }
 
 /**
- * Get related posts based on category
+ * Get related posts based on overlapping tags
  */
 export function getRelatedPosts(
   posts: CollectionEntry<'blog'>[],
   currentSlug: string,
-  currentCategory: string,
+  currentTags: string[],
   limit: number = 3
 ): CollectionEntry<'blog'>[] {
-  // First try to get posts from same category
-  const sameCategoryPosts = posts.filter(post => post.data.category === currentCategory && post.id !== currentSlug)
+  const filtered = posts.filter(post => post.slug !== currentSlug && !post.data.draft)
 
-  // If we have enough posts from same category, use them
-  if (sameCategoryPosts.length >= limit) {
-    return sameCategoryPosts.slice(0, limit)
-  }
+  const scored = filtered
+    .map(post => {
+      const overlap = post.data.tags?.filter(tag => currentTags.includes(tag)).length ?? 0
+      return { post, overlap }
+    })
+    .sort((a, b) => b.overlap - a.overlap || b.post.data.pubDate.getTime() - a.post.data.pubDate.getTime())
 
-  // If not enough posts from same category, fill with other posts
-  const otherPosts = posts.filter(post => post.data.category !== currentCategory && post.id !== currentSlug)
-
-  return [...sameCategoryPosts, ...otherPosts].slice(0, limit)
+  return scored.slice(0, limit).map(item => item.post)
 }
 
 /**
- * Get navigation links for previous and next posts
+ * Get navigation links for previous and next posts by date (newest first)
  */
 export function getPostNavigation(
   posts: CollectionEntry<'blog'>[],
   currentSlug: string
 ): { previous: CollectionEntry<'blog'> | null; next: CollectionEntry<'blog'> | null } {
-  // Sort posts by pubDate (newest first)
-  const sortedPosts = [...posts].sort((a, b) => a.data.id - b.data.id)
-  const currentIndex = sortedPosts.findIndex(post => post.id === currentSlug)
+  const sorted = [...posts]
+    .filter(post => !post.data.draft)
+    .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  const index = sorted.findIndex(post => post.slug === currentSlug)
 
-  if (currentIndex === -1) {
-    return { previous: null, next: null }
+  return {
+    previous: index > 0 ? sorted[index - 1] : null,
+    next: index >= 0 && index < sorted.length - 1 ? sorted[index + 1] : null
   }
-
-  const previous = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null
-  const next = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null
-
-  return { previous, next }
 }
 
 /**
- * Format date to readable string
+ * Format date to readable Swahili string
  */
 export function formatDate(date: Date): string {
-  return date.toLocaleDateString('en-US', {
+  return date.toLocaleDateString('sw-TZ', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
+    day: 'numeric',
+    timeZone: 'Africa/Dar_es_Salaam'
   })
 }

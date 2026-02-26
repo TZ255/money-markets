@@ -1,26 +1,26 @@
 {
-  "name": "Ink - Blog Landing Page | Shadcn Studio",
-  "short_name": "Ink",
-  "description": "Ink is a free Shadcn UI Blog Landing Page template to publish articles, insights, and categories with a clean, fast, and readable layout.",
+  "name": "UwekezajiTZ",
+  "short_name": "UwekezajiTZ",
+  "description": "Mwongozo wa uwekezaji Tanzania: hisa (DSE), mutual funds, hati fungani na elimu ya fedha kwa Kiswahili.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#eaedf8",
-  "theme_color": "#111826",
+  "background_color": "#f7f7fb",
+  "theme_color": "#0f172a",
   "orientation": "portrait-primary",
   "categories": [
-    "productivity",
-    "business",
-    "development"
+    "finance",
+    "education",
+    "business"
   ],
   "icons": [
     {
-      "src": "/favicon/android-chrome-192x192.png",
+      "src": "/favicon/web-app-manifest-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/favicon/android-chrome-512x512.png",
+      "src": "/favicon/web-app-manifest-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     },
@@ -30,19 +30,20 @@
       "type": "image/png"
     },
     {
-      "src": "/favicon/favicon-32x32.png",
-      "sizes": "32x32",
+      "src": "/favicon/favicon-96x96.png",
+      "sizes": "96x96",
       "type": "image/png"
     },
     {
-      "src": "/favicon/favicon-16x16.png",
-      "sizes": "16x16",
-      "type": "image/png"
+      "src": "/favicon/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable any"
     }
   ],
   "screenshots": [
     {
-      "src": "/images/og-image.png",
+      "src": "/images/og-uwekezaji.png",
       "sizes": "1200x630",
       "type": "image/png",
       "form_factor": "wide"
@@ -52,7 +53,7 @@
     {
       "name": "Home",
       "short_name": "Home",
-      "description": "Go to homepage",
+      "description": "Nenda kwenye ukurasa wa mwanzo",
       "url": "/"
     }
   ]

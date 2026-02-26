@@ -2,21 +2,11 @@
 
 import { ArrowRightIcon, CalendarDaysIcon } from 'lucide-react'
 
-import { getCollection } from 'astro:content'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 
 import type { BlogPost } from '@/components/blocks/blog-component/blog-component'
-
-export async function getStaticPaths() {
-  const blogEntries = await getCollection('blog')
-
-  return blogEntries.map(entry => ({
-    params: { slug: entry.id },
-    props: { entry }
-  }))
-}
 
 const Blog = ({ relatedPosts }: { relatedPosts: BlogPost[] }) => {
   return (

@@ -1,0 +1,26 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+import BlogList from '@/components/blog/BlogList.astro'
+
+const pageSize = 12
+const posts = (await getCollection('blog'))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+
+const currentPage = 1
+const totalPages = Math.max(1, Math.ceil(posts.length / pageSize))
+const pagePosts = posts.slice(0, pageSize)
+---
+
+<Layout
+  title='Blog'
+  description='Makala za uwekezaji kwa Kiswahili: hisa, mutual funds, hati fungani.'
+  type='website'
+>
+  <section class='py-12 sm:py-16'>
+    <div class='mx-auto max-w-6xl px-4 sm:px-6 lg:px-8'>
+      <BlogList posts={pagePosts} page={currentPage} totalPages={totalPages} />
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,36 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+import BlogList from '@/components/blog/BlogList.astro'
+
+export async function getStaticPaths() {
+  const pageSize = 12
+  const posts = (await getCollection('blog')).filter(post => !post.data.draft)
+  const totalPages = Math.max(1, Math.ceil(posts.length / pageSize))
+
+  return Array.from({ length: totalPages - 1 }, (_, i) => ({
+    params: { page: String(i + 2) },
+    props: { page: i + 2, pageSize, totalPages }
+  }))
+}
+
+const { page, pageSize, totalPages } = Astro.props as { page: number; pageSize: number; totalPages: number }
+const posts = (await getCollection('blog'))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+
+const start = (page - 1) * pageSize
+const pagePosts = posts.slice(start, start + pageSize)
+---
+
+<Layout
+  title={`Blog - Ukurasa ${page}`}
+  description='Makala za uwekezaji kwa Kiswahili: hisa, mutual funds, hati fungani.'
+  type='website'
+>
+  <section class='py-12 sm:py-16'>
+    <div class='mx-auto max-w-6xl px-4 sm:px-6 lg:px-8'>
+      <BlogList posts={pagePosts} page={page} totalPages={totalPages} />
+    </div>
+  </section>
+</Layout>

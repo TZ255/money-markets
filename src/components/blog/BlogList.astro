@@ -1,0 +1,66 @@
+---
+import PostCard from '@/components/blog/PostCard.astro'
+import TagPill from '@/components/blog/TagPill.astro'
+import Breadcrumbs from '@/components/blog/Breadcrumbs.astro'
+
+interface PaginationLink {
+  href: string
+  label: string
+  active?: boolean
+}
+
+const { posts, page, totalPages, tag } = Astro.props as {
+  posts: any[]
+  page: number
+  totalPages: number
+  tag?: string
+}
+
+const pagination: PaginationLink[] = Array.from({ length: totalPages }, (_, i) => ({
+  href: i === 0 ? '/blog' : `/blog/page/${i + 1}`,
+  label: String(i + 1),
+  active: i + 1 === page
+}))
+---
+
+<div class='space-y-10'>
+  <div class='flex flex-wrap items-center justify-between gap-4'>
+    <div>
+      <Breadcrumbs
+        items={[
+          { label: 'Mwanzo', href: '/' },
+          { label: 'Blog' },
+          ...(tag ? [{ label: `Tag: ${tag}` }] : [])
+        ]}
+      />
+      <h1 class='mt-2 text-3xl font-bold text-foreground'>Blog ya UwekezajiTZ</h1>
+      <p class='text-muted-foreground'>Makala za hisa, mutual funds, na misingi ya fedha kwa Kiswahili.</p>
+    </div>
+    <div class='flex flex-wrap gap-2'>
+      {tag ? <TagPill tag={tag} /> : null}
+    </div>
+  </div>
+
+  {posts.length === 0 ? (
+    <p class='text-muted-foreground'>Hakuna makala kwa sasa.</p>
+  ) : (
+    <div class='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
+      {posts.map(post => (
+        <PostCard post={post} />
+      ))}
+    </div>
+  )}
+
+  {totalPages > 1 && (
+    <nav class='flex items-center gap-2 text-sm'>
+      {pagination.map(item => (
+        <a
+          href={item.href}
+          class={`rounded-md border px-3 py-2 ${item.active ? 'bg-primary text-primary-foreground' : 'text-foreground hover:bg-muted'}`}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  )}
+</div>

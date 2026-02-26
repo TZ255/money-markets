@@ -76,20 +76,28 @@ const Header = ({ navigationData, className }: HeaderProps) => {
   }, [activeSection])
 
   useLayoutEffect(() => {
-    // Update activeSection based on the current route using window.location.pathname
-    const path = window.location.pathname
-
-    setTimeout(() => {
+    const updateActive = () => {
+      const path = window.location.pathname
       if (path === '/' || path === '/#home') {
-        setActiveSection('home')
-      } else if (path.startsWith('/blog/')) {
-        setActiveSection('') // Don't show any active state on blog post pages
-      } else if (path.startsWith('/contact')) {
-        setActiveSection('') // Don't show any active state on contact page
+        setActiveSection('/')
+      } else if (path.startsWith('/blog')) {
+        setActiveSection('/blog')
+      } else if (path.startsWith('/dse')) {
+        setActiveSection('/dse')
+      } else if (path.startsWith('/mutual-funds')) {
+        setActiveSection('/mutual-funds')
+      } else if (path.startsWith('/kuhusu')) {
+        setActiveSection('/kuhusu')
+      } else if (path.startsWith('/wasiliana')) {
+        setActiveSection('/wasiliana')
       } else {
-        setActiveSection('') // Default case for other routes
+        setActiveSection('')
       }
-    }, 0)
+    }
+
+    updateActive()
+    window.addEventListener('astro:page-load', updateActive)
+    return () => window.removeEventListener('astro:page-load', updateActive)
   }, [])
 
   return (
@@ -104,9 +112,9 @@ const Header = ({ navigationData, className }: HeaderProps) => {
     >
       <div className='mx-auto flex h-full max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8'>
         {/* Logo */}
-        <a href='/#home' className='flex items-center gap-3'>
+        <a href='/' className='flex items-center gap-3'>
           <LogoSvg />
-          <span className='text-primary text-[20px] font-semibold'>INK</span>
+          <span className='text-primary text-[20px] font-semibold'>UwekezajiTZ</span>
         </a>
 
         {/* Navigation */}
@@ -116,7 +124,7 @@ const Header = ({ navigationData, className }: HeaderProps) => {
         <div className='flex gap-3'>
           <ThemeToggle />
           <Button variant='outline' className='max-sm:hidden' asChild>
-            <a href='/contact-us'>Get in Touch</a>
+            <a href='/wasiliana'>Wasiliana</a>
           </Button>
 
           {/* Navigation for small screens */}
@@ -125,13 +133,13 @@ const Header = ({ navigationData, className }: HeaderProps) => {
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button variant='outline' size='icon' className='sm:hidden' asChild>
-                    <a href='/contact-us'>
+                    <a href='/wasiliana'>
                       <MailIcon />
-                      <span className='sr-only'>Get in Touch</span>
+                      <span className='sr-only'>Wasiliana</span>
                     </a>
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent>Get in Touch</TooltipContent>
+                <TooltipContent>Wasiliana</TooltipContent>
               </Tooltip>
             </TooltipProvider>
 

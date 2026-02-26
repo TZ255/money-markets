@@ -1,116 +1,103 @@
-// Site Configuration
-// Centralized configuration for site metadata, SEO, and branding
-
-export const SITE_TITLE = 'Demo: Ink - Blog Landing Page | Shadcn Studio'
+export const SITE_TITLE = 'UwekezajiTZ'
 export const SITE_DESCRIPTION =
-  'Ink is a free Shadcn UI Blog Landing Page template to publish articles, insights, and categories with a clean, fast, and readable layout.'
+  'Mwongozo wa uwekezaji Tanzania ... hisa (DSE), mutual funds, hati fungani, na elimu ya fedha kwa Kiswahili.'
 
-export const GITHUB_URL = 'https://github.com/yourusername/master-shadcn-astro'
-export const SITE_URL = 'https://shadcnstudio.com/'
+export const SITE_URL = 'https://uwekezaji.co.tz'
 
 export const SITE_METADATA = {
   title: {
-    default: 'Demo: Ink - Blog Landing Page | Shadcn Studio'
+    default: 'UwekezajiTZ | Mwongozo wa Uwekezaji wa Hisa na Mifuko ya Uwekezaji Tanzania'
   },
-  description:
-    'Ink is a free Shadcn UI Blog Landing Page template to publish articles, insights, and categories with a clean, fast, and readable layout.',
+  description: SITE_DESCRIPTION,
   keywords: [
-    'Astro',
-    'astro template',
-    'astro theme',
-    'astro starter',
-    'shadcn template',
-    'shadcn ui',
-    'shadcn/ui components',
-    'tailwind template',
-    'tailwind css',
-    'react components',
-    'SEO optimized',
-    'web development',
-    'static site generator',
-    'modern web apps',
-    'performance',
-    'typescript'
+    'Uwekezaji Tanzania',
+    'DSE',
+    'Dar es Salaam Stock Exchange',
+    'Mutual Funds',
+    'UTT',
+    'Hati fungani',
+    'Bonds Tanzania',
+    'Elimu ya fedha',
+    'Dividend',
+    'ETF',
+    'Hisa',
+    'Mwongozo wa uwekezaji'
   ],
-  authors: [{ name: 'shadcn Studio', url: SITE_URL }],
-  creator: 'shadcn Studio',
-  publisher: 'shadcn Studio',
+  authors: [{ name: 'UwekezajiTZ', url: SITE_URL }],
+  creator: 'UwekezajiTZ',
+  publisher: 'UwekezajiTZ',
   robots: {
     index: true,
     follow: true
   },
-  language: 'en-US',
-  locale: 'en_US',
+  language: 'sw-TZ',
+  locale: 'sw_TZ',
   icons: {
     icon: [
-      { url: '/favicon/favicon.ico', sizes: '48x48' },
-      { url: '/favicon/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/favicon/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
-      { url: '/favicon/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' }
+      { url: '/favicon/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon/favicon.ico', sizes: 'any' },
+      { url: '/favicon/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/favicon/web-app-manifest-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/favicon/web-app-manifest-512x512.png', sizes: '512x512', type: 'image/png' }
     ],
     apple: [{ url: '/favicon/apple-touch-icon.png', sizes: '180x180' }],
     shortcut: [{ url: '/favicon/favicon.ico' }]
   },
   openGraph: {
     type: 'website',
-    locale: 'en_US',
-    siteName: 'Ink',
-    title: 'Ink - Blog Landing Page | Shadcn Studio',
-    description:
-      'Ink is a free Shadcn UI Blog Landing Page template to publish articles, insights, and categories with a clean, fast, and readable layout.',
+    locale: 'sw_TZ',
+    siteName: 'UwekezajiTZ',
+    title: 'UwekezajiTZ',
+    description: SITE_DESCRIPTION,
     images: [
       {
-        url: '/images/og-image.png',
+        url: '/images/og-uwekezaji.png',
         width: 1200,
         height: 630,
-        alt: 'Ink - Blog Landing Page',
+        alt: 'UwekezajiTZ - Mwongozo wa Uwekezaji Tanzania',
         type: 'image/png'
       }
     ]
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@shadcnstudio',
-    creator: '@shadcnstudio',
-    title: 'Ink - Blog Landing Page | Shadcn Studio',
-    description:
-      'Ink is a free Shadcn UI Blog Landing Page template to publish articles, insights, and categories with a clean, fast, and readable layout.',
-    images: ['/images/og-image.png']
+    site: '@uwekezajitz',
+    creator: '@uwekezajitz',
+    title: 'UwekezajiTZ',
+    description: SITE_DESCRIPTION,
+    images: ['/images/og-uwekezaji.png']
   },
   verification: {
-    google: '', // Add your Google verification code
-    yandex: '', // Add your Yandex verification code
-    bing: '' // Add your Bing verification code
+    google: '',
+    yandex: '',
+    bing: ''
   }
 }
 
-// Social media links
 export const SOCIAL_LINKS = {
-  github: GITHUB_URL,
-  twitter: 'https://twitter.com/shadcnstudio',
-  linkedin: 'https://linkedin.com/company/shadcnstudio',
-  discord: 'https://discord.gg/shadcnstudio'
+  twitter: 'https://twitter.com/uwekezajitz',
+  linkedin: 'https://linkedin.com/company/uwekezajitz',
+  youtube: 'https://www.youtube.com/@uwekezajitz',
+  email: 'mailto:info@uwekezaji.co.tz'
 }
 
-// Company information for structured data
 export const COMPANY_INFO = {
-  name: 'Ink',
-  legalName: 'shadcn Studio Inc.',
+  name: 'UwekezajiTZ',
+  legalName: 'UwekezajiTZ Media',
   url: SITE_URL,
-  logo: `/images/site-logo.png`,
+  logo: `/images/og-uwekezaji.png`,
   foundingDate: '2024',
   address: {
-    streetAddress: '123 Web Dev Street',
-    addressLocality: 'San Francisco',
-    addressRegion: 'CA',
-    postalCode: '94102',
-    addressCountry: 'US'
+    streetAddress: 'Kariakoo',
+    addressLocality: 'Dar es Salaam',
+    addressRegion: 'Dar es Salaam',
+    postalCode: '11101',
+    addressCountry: 'TZ'
   },
   contactPoint: {
-    telephone: '+1-555-123-4567',
-    contactType: 'customer support',
-    email: 'support@shadcnstudio.com'
+    telephone: '+255 743 000 000',
+    contactType: 'usaidizi',
+    email: 'info@uwekezaji.co.tz'
   },
   sameAs: Object.values(SOCIAL_LINKS)
 }

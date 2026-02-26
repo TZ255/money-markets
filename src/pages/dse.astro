@@ -1,0 +1,49 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+import PostCard from '@/components/blog/PostCard.astro'
+
+const posts = (await getCollection('blog'))
+  .filter(post => !post.data.draft && post.data.tags?.includes('DSE'))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+
+const title = 'Uwekezaji wa Hisa (DSE)'
+const description =
+  'Miongozo ya kuanza na DSE: kufungua akaunti ya CDS, kuchagua mawakala, kutathmini kampuni na kufuatilia gawio.'
+---
+
+<Layout title={title} description={description} type='website'>
+  <section class='py-12 sm:py-16'>
+    <div class='mx-auto max-w-6xl space-y-8 px-4 sm:px-6 lg:px-8'>
+      <header class='space-y-3'>
+        <p class='text-sm font-semibold text-primary'>DSE</p>
+        <h1 class='text-4xl font-bold text-foreground'>{title}</h1>
+        <p class='text-muted-foreground'>{description}</p>
+      </header>
+
+      <div class='rounded-xl border border-border bg-card/40 p-5 shadow-sm prose dark:prose-invert'>
+        <p>
+          DSE ni mahali pa kuuza na kununua hisa za makampuni ya umma Tanzania. Tunakupa hatua za vitendo: kuchagua
+          wakala, kuelewa ada, kuweka maagizo ya kununua/kuuza, na kutathmini kampuni kabla ya kuwekeza. Kumbuka kuweka
+          akiba ya dharura na kutotumia pesa ya kodi kama tulivyoshauri kwenye makala ya usimamizi wa hatari.
+        </p>
+      </div>
+
+      <div class='space-y-4'>
+        <div class='flex items-center justify-between'>
+          <h2 class='text-2xl font-semibold text-foreground'>Makala za DSE</h2>
+          <a class='text-primary hover:underline font-medium text-sm' href='/blog'>Blog yote</a>
+        </div>
+        {posts.length === 0 ? (
+          <p class='text-muted-foreground'>Hakuna makala za DSE kwa sasa.</p>
+        ) : (
+          <div class='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
+            {posts.map(post => (
+              <PostCard post={post} />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+</Layout>

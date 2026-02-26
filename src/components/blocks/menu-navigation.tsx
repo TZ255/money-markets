@@ -44,9 +44,8 @@ const MenuNavigation = ({ navigationData, activeSection, className }: MenuNaviga
         {navigationData.map(navItem => {
           if (navItem.href) {
             // Root link item
-            // Extract section ID from href (e.g., "/#categories" -> "categories", "/#" -> "home")
             const sectionFromHref = navItem.href === '/#' ? 'home' : navItem.href.replace('/#', '')
-            const isActive = sectionFromHref === activeSection
+            const isActive = sectionFromHref === activeSection || navItem.href === activeSection
 
             return (
               <NavigationMenuItem key={navItem.title}>

@@ -3,31 +3,23 @@ import { getCollection } from 'astro:content'
 import { SITE_TITLE, SITE_DESCRIPTION } from '@/consts'
 
 export async function GET(context) {
-  let posts = []
-
-  try {
-    posts = await getCollection('blog')
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  } catch (error) {
-    // Collection is empty or doesn't exist
-    console.log('No blog posts found, generating empty RSS feed')
-  }
-
-  const publishedPosts = posts.filter(post => !post.data.featured)
+  const posts = (await getCollection('blog'))
+    .filter(post => !post.data.draft)
+    .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
 
   return rss({
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     site: context.site,
-    items: publishedPosts.map(post => ({
+    items: posts.map(post => ({
       title: post.data.title,
       description: post.data.description,
       pubDate: post.data.pubDate,
-      link: `/blog/${post.id}/`,
-      author: post.data.author,
-      categories: post.data.tags || []
+      link: `/blog/${post.slug}`,
+      categories: post.data.tags || [],
+      author: post.data.author || 'UwekezajiTZ'
     })),
-    customData: `<language>en-us</language>`,
+    customData: `<language>sw-TZ</language>`,
     stylesheet: '/rss-styles.xsl'
   })
 }

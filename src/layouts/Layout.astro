@@ -11,20 +11,28 @@ import type { NavigationSection } from '@/components/blocks/menu-navigation'
 
 const navigationData: NavigationSection[] = [
   {
-    title: 'Home',
-    href: '/#home'
+    title: 'Mwanzo',
+    href: '/'
   },
   {
-    title: 'Categories',
-    href: '/#categories'
+    title: 'Blog',
+    href: '/blog'
   },
   {
-    title: 'Team',
-    href: '#'
+    title: 'DSE',
+    href: '/dse'
   },
   {
-    title: 'About Us',
-    href: '#'
+    title: 'Mutual Funds',
+    href: '/mutual-funds'
+  },
+  {
+    title: 'Kuhusu',
+    href: '/kuhusu'
+  },
+  {
+    title: 'Wasiliana',
+    href: '/wasiliana'
   }
 ]
 
@@ -46,7 +54,7 @@ const seoProps = Astro.props as Props
 ---
 
 <!doctype html>
-<html lang='en' class='scroll-smooth'>
+<html lang='sw' class='scroll-smooth'>
   <head>
     <HeadSeo {...seoProps} />
     <ClientRouter />

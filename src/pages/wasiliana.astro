@@ -1,0 +1,61 @@
+---
+import Layout from '@/layouts/Layout.astro'
+
+const title = 'Wasiliana Nasi'
+const description = 'Tuma maoni, mapendekezo ya mada, au swali kuhusu uwekezaji Tanzania.'
+---
+
+<Layout title={title} description={description} type='website'>
+  <section class='py-12 sm:py-16'>
+    <div class='mx-auto max-w-4xl space-y-8 px-4 sm:px-6 lg:px-8'>
+      <header class='space-y-3 text-center'>
+        <p class='text-sm font-semibold text-primary'>Wasiliana</p>
+        <h1 class='text-4xl font-bold text-foreground'>{title}</h1>
+        <p class='text-muted-foreground'>{description}</p>
+        <p class='text-sm'>Barua pepe: <a class='text-primary hover:underline' href='mailto:info@uwekezaji.co.tz'>info@uwekezaji.co.tz</a></p>
+      </header>
+
+      <form class='grid gap-4 rounded-2xl border border-border bg-card/50 p-6 shadow-sm'>
+        <div class='grid gap-2 sm:grid-cols-2'>
+          <label class='space-y-1'>
+            <span class='text-sm font-medium'>Jina kamili</span>
+            <input required name='name' class='w-full rounded-md border border-border bg-background px-3 py-2' />
+          </label>
+          <label class='space-y-1'>
+            <span class='text-sm font-medium'>Barua pepe</span>
+            <input required type='email' name='email' class='w-full rounded-md border border-border bg-background px-3 py-2' />
+          </label>
+        </div>
+
+        <label class='space-y-1'>
+          <span class='text-sm font-medium'>Aina ya swali</span>
+          <select name='topic' class='w-full rounded-md border border-border bg-background px-3 py-2'>
+            <option>Maswali ya DSE</option>
+            <option>Mutual Funds</option>
+            <option>Hati fungani / Bonds</option>
+            <option>Mawazo ya mada</option>
+            <option>Nyingine</option>
+          </select>
+        </label>
+
+        <label class='space-y-1'>
+          <span class='text-sm font-medium'>Ujumbe</span>
+          <textarea
+            name='message'
+            rows='5'
+            class='w-full rounded-md border border-border bg-background px-3 py-2'
+            placeholder='Andika swali au maoni yako...'
+          />
+        </label>
+
+        <button
+          type='submit'
+          class='inline-flex items-center justify-center rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90'
+        >
+          Tuma ujumbe
+        </button>
+        <p class='text-xs text-muted-foreground'>*Fomu hii haina backend bado. Tuma pia barua pepe kwa usalama.</p>
+      </form>
+    </div>
+  </section>
+</Layout>

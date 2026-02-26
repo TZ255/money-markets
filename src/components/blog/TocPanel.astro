@@ -1,0 +1,15 @@
+---
+import DynamicToc from '@/components/astro/DynamicToc.astro'
+
+const { headings } = Astro.props as { headings: { depth: number; slug: string; text: string }[] }
+const visible = headings && headings.length > 0
+---
+
+{visible && (
+  <aside class='sticky top-24 hidden md:block'>
+    <div class='rounded-xl border border-border bg-card/60 p-4 shadow-sm'>
+      <h3 class='mb-3 text-sm font-semibold text-foreground'>Yaliyomo</h3>
+      <DynamicToc headings={headings} />
+    </div>
+  </aside>
+)}
