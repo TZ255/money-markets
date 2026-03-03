@@ -6,4 +6,4 @@ Disallow: /_astro/
 Disallow: /search?
 Disallow: /*?q=
 
-Sitemap: https://uwekezaji.co.tz/sitemap-index.xml
+Sitemap: https://uwekezaji.co.tz/sitemap-0.xml
